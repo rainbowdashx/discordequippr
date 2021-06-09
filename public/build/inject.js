@@ -10,7 +10,7 @@
     // @match        https://discord.com/*
     // @icon         https://www.google.com/s2/favicons?domain=discord.com
     // @grant        none
-    // @require      file://P:\wowstuff\discordequippr\public\build\inject.js
+    // @updateURL    https://raw.githubusercontent.com/rainbowdashx/discordequippr/master/public/build/inject.js
     // ==/UserScript==
 
     const CSS = " main.svelte-1pjshfa{padding:4px;color:#fff;font-family:monospace;position:fixed;width:250px;background-color:#222;top:150px;left:50%;z-index:999999999}.d-flex.svelte-1pjshfa{display:flex;justify-content:center}.col.svelte-1pjshfa{flex-direction:column}@media(min-width: 640px){main.svelte-1pjshfa{max-width:none}}div.svelte-13n1ycw{display:flex;flex-direction:column;align-items:center;justify-content:space-between}button.svelte-13n1ycw{background-color:orange;border:1px solid black;padding:4px 10px;cursor:pointer;margin-top:20px;margin-bottom:10px;font-size:32px}div.svelte-111ergi{display:flex;flex-direction:column;justify-content:center}p.svelte-111ergi{color:orange} ";
