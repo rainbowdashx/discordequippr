@@ -20,6 +20,10 @@
             "!work": 3,
             "!search": 7,
         };
+        let funcs={
+            "!work": sendMessageWork,
+            "!search": sendMessageSearch,
+        }
         let time = (secPadding + cd[label] * 60) * 1000;
         console.log({
             cd:cd[label],
@@ -28,7 +32,7 @@
         buttonText = running;
         statusTimer[label] = time + Date.now();
         nextWorkControl[label] = setTimeout(() => {
-            sendMessageWork();
+           funcs[label]();
         }, time);
     }
 
