@@ -64,7 +64,7 @@
 
     function sendMessage(msg) {
         clearTimeout(timeControl);
-        status = "Send msg: " + msg + Date.now().toTimeString().slice(0, 9);
+        status = "Send msg: " + msg + new Date(Date.now()).toTimeString().slice(0, 9);
         let body = {
             content: msg,
             tts: false,
