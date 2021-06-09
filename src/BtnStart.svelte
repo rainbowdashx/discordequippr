@@ -21,11 +21,14 @@
             "!search": 7,
         };
         let time = (secPadding + cd[label] * 60) * 1000;
+        console.log({
+            cd:cd[label],
+            msg : label
+        });
         buttonText = running;
         statusTimer[label] = time + Date.now();
         nextWorkControl[label] = setTimeout(() => {
             sendMessageWork();
-            setTimeout(() =>sendMessageSearch(),2000);
         }, time);
     }
 
@@ -64,7 +67,11 @@
 
     function sendMessage(msg) {
         clearTimeout(timeControl);
-        status = "Send msg: " + msg + new Date(Date.now()).toTimeString().slice(0, 9);
+        status =
+            "Send msg: " +
+            msg +
+            " " +
+            new Date(Date.now()).toTimeString().slice(0, 9);
         let body = {
             content: msg,
             tts: false,
@@ -89,7 +96,14 @@
 </script>
 
 <div>
-    <button on:click={sendMessageWork}> {buttonText} </button>
+    <button
+        on:click={() => {
+            sendMessageWork();
+            setTimeout(() => sendMessageSearch(), 15000);
+        }}
+    >
+        {buttonText}
+    </button>
 
     <Status {status} timer={statusTimer} />
 </div>

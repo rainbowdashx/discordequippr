@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BOTOS MAXIMUS
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @description  WO GPU?????!
 // @author       HOLLYCHRIAS
 // @match        https://discord.com/*
