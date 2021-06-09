@@ -3,13 +3,18 @@
     import { authKey } from './store.js';
 
     function setLocalStorage(){
-        localStorage.setItem("___equippr_token",$authKey);
+        try {
+            localStorage.setItem("___equippr_token",$authKey);
+        } catch (error) {
+        }
     }
-
 
     let auth =  localStorage.getItem("___equippr_token");
     if (auth){
-        $authKey = auth;
+        try {
+            $authKey = auth;
+        } catch (error) {
+        }
     }
 
 </script>
