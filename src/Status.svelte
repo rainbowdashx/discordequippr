@@ -5,7 +5,6 @@
     let txtTime = "";
     setInterval(() => {
         if (!isNaN(timer)) {
-            console.log("a");
             let diff = new Date(new Date(timer) - Date.now());
             txtTime = diff.getMinutes() + "m : " + diff.getSeconds() + "s";
         }
