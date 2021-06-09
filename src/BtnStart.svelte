@@ -3,8 +3,6 @@
     import Status from "./Status.svelte";
     import jQ from "jquery";
 
-    let auth = "OTY3MjMzMTE0MDAwNjI5NzY.DjASYA.dx-HbqDA0JJG_Q1HD2DaDtV-wNE";
-
     let timeControl;
     let nextWorkControl;
     let lastUsedCaptcha;
