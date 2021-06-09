@@ -9,9 +9,9 @@
         }
     }
 
-    let auth =  localStorage.getItem("___equippr_token");
     if (auth){
         try {
+            let auth =  localStorage.getItem("___equippr_token");
             $authKey = auth;
         } catch (error) {
         }
