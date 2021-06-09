@@ -4,24 +4,28 @@
     import jQ from "jquery";
 
     let timeControl;
-    let nextWorkControl;
+    let nextWorkControl = {};
     let lastUsedCaptcha;
     let status = "Dormant";
-    let statusTimer;
+    let statusTimer = {};
 
     const dormant = "😇";
     const running = "😱";
     let buttonText = dormant;
 
-    function startTimer() {
-        clearTimeout(nextWorkControl);
+    function startTimer(label) {
+        clearTimeout(nextWorkControl[label]);
         let secPadding = Math.random() * 60;
-        let time = (secPadding + 3 * 60) * 1000;
+        let cd = {
+            "!work": 3,
+            "!search": 7,
+        };
+        let time = (secPadding + cd[label] * 60) * 1000;
         buttonText = running;
-        status = "Next message: " + new Date(time + Date.now()).toTimeString().slice(0,9);
-        statusTimer = time + Date.now();
-        nextWorkControl = setTimeout(() => {
+        statusTimer[label] = time + Date.now();
+        nextWorkControl[label] = setTimeout(() => {
             sendMessageWork();
+            setTimeout(() =>sendMessageSearch(),2000);
         }, time);
     }
 
@@ -47,18 +51,20 @@
                     sendMessage("!solve " + result);
                     status = "Captcha solved: " + result;
                 }
-            } catch (error) {
-
-            }
+            } catch (error) {}
         }, 10000);
     }
 
     function sendMessageWork() {
         sendMessage("!work");
     }
+    function sendMessageSearch() {
+        sendMessage("!search");
+    }
 
     function sendMessage(msg) {
         clearTimeout(timeControl);
+        status = "Send msg: " + msg + Date.now().toTimeString().slice(0, 9);
         let body = {
             content: msg,
             tts: false,
@@ -76,7 +82,7 @@
                 credentials: "include",
             }
         ).then((res) => {
-            startTimer();
+            startTimer(msg);
             startCaptchaSolver();
         });
     }
@@ -85,7 +91,7 @@
 <div>
     <button on:click={sendMessageWork}> {buttonText} </button>
 
-    <Status status={status} timer={statusTimer}/>
+    <Status {status} timer={statusTimer} />
 </div>
 
 <style>
@@ -94,7 +100,6 @@
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
-
     }
 
     button {
