@@ -3,7 +3,7 @@
     import Status from "./Status.svelte";
     import jQ from "jquery";
 
-    let timeControl;
+    let captchaControl;
     let nextWorkControl = {};
     let lastUsedCaptcha;
     let status = "Dormant";
@@ -15,7 +15,7 @@
 
     function startTimer(label) {
         clearTimeout(nextWorkControl[label]);
-        let secPadding = Math.random() * 60;
+        let secPadding = Math.random() * (60 * 4);
         let cd = {
             "!work": 3,
             "!search": 7,
@@ -37,8 +37,8 @@
     }
 
     function startCaptchaSolver() {
-        clearInterval(timeControl);
-        timeControl = setInterval(() => {
+        clearInterval(captchaControl);
+        captchaControl = setInterval(() => {
             try {
                 let msg = jQ(".mention:Contains(" + $userName + ")")
                     .parent("div:Contains(Captcha ausgewählt)")
@@ -69,8 +69,12 @@
         sendMessage("!search");
     }
 
+    function skipHandler(label){
+            startTimer(label);
+    }
+
     function sendMessage(msg) {
-        clearTimeout(timeControl);
+        clearTimeout(captchaControl);
         status =
             "Send msg: " +
             msg +
@@ -103,13 +107,13 @@
     <button
         on:click={() => {
             sendMessageWork();
-            setTimeout(() => sendMessageSearch(), 15000);
+            setTimeout(() => sendMessageSearch(), (Math.random() * 20000  ) + 12000);
         }}
     >
         {buttonText}
     </button>
 
-    <Status {status} timer={statusTimer} />
+    <Status {status} timer={statusTimer} skipHandler={skipHandler} />
 </div>
 
 <style>
