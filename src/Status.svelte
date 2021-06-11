@@ -32,11 +32,15 @@
     <p>{status}</p>
 
     {#each txtTime as item}
-        <p>{item.text}</p>
-        <button
-            on:click={typeof skipHandler !== "undefined" && skipHandler(item.label)}
-            >X</button
-        >
+        <div class="wrapper">
+            <p>{item.text}</p>
+            <button
+                on:click={typeof skipHandler !== "undefined" &&
+                    skipHandler(item.label)}
+            >
+                🤫
+            </button>
+        </div>
     {/each}
 </div>
 
@@ -48,5 +52,19 @@
     }
     p {
         color: orange;
+    }
+
+    .wrapper {
+        display: flex;
+        flex-direction: row;
+    }
+
+    button {
+        background-color: transparent;
+        color: orange;
+        padding: 4px 10px;
+        cursor: pointer;
+        font-size: 12px;
+        border: none;
     }
 </style>
